@@ -21,10 +21,9 @@ public class ShardingPropertites {
 
 
     @Data
-    public class TableProperties {
+    public static class TableProperties {
         private List<String> actualDataNodes;
         private Properties databaseStrategy;
         private Properties tableStrategy;
     }
-
 }
