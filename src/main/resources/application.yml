@@ -15,3 +15,12 @@ spring:
                 url: jdbc:mysql://localhost:3306/ds1?useUnicode=true&characterEncoding=utf-8&useSSL=false
                 username: root
                 password: 123456
+        tables:
+            user:
+                actualDataNodes: ds0.user0,ds0.user1,ds1.user0,ds1.user1
+                databaseStrategy:
+                    shardingColumn: id
+                    algorithmExpression: ds${id % 2}
+                tableStrategy:
+                    shardingColumn: id
+                    algorithmExpression: user${id % 3}

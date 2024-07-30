@@ -15,7 +15,6 @@ import java.sql.Connection;
  * @date 2024/7/30 15:42
  */
 @Slf4j
-@Component
 @Intercepts(@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})) // 拦截prepare方法
 public class SqlStatementInterceptor implements Interceptor {
     @Override

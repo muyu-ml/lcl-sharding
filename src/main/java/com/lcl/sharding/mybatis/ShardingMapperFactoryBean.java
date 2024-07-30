@@ -1,9 +1,11 @@
 package com.lcl.sharding.mybatis;
 
 import com.lcl.sharding.engine.ShardingContext;
+import com.lcl.sharding.engine.ShardingEngine;
 import com.lcl.sharding.engine.ShardingResult;
 import com.lcl.sharding.demo.model.User;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -20,6 +22,9 @@ import java.lang.reflect.Proxy;
 @NoArgsConstructor
 @Slf4j
 public class ShardingMapperFactoryBean<T> extends MapperFactoryBean<T> {
+
+    @Setter
+    ShardingEngine shardingEngine;
     public ShardingMapperFactoryBean(Class<T> mapperInterface) {
         super(mapperInterface);
     }
@@ -39,16 +44,8 @@ public class ShardingMapperFactoryBean<T> extends MapperFactoryBean<T> {
             MappedStatement statement = configuration.getMappedStatement(mapperId);
             BoundSql boundSql = statement.getBoundSql(args);
             String sql = boundSql.getSql();
-            log.info(" =====>>> sql statement: {}", sql);
-            Object parameterObject = args[0];
-            log.info(" =====>>> sql parameters type: {}", parameterObject.getClass());
-            // 根据参数设置数据源
-            if(parameterObject instanceof User user){
-                ShardingContext.setShardingResult(new ShardingResult(user.getId() % 2 == 0 ? "ds0" : "ds1"));
-            } else if (parameterObject instanceof Integer id) {
-                ShardingContext.setShardingResult(new ShardingResult(id % 2 == 0 ? "ds0" : "ds1"));
-            }
-            log.info(" =====>>> sql parameters: {}", parameterObject);
+            ShardingResult result = shardingEngine.sharding(sql, args);
+            ShardingContext.setShardingResult(result);
             return method.invoke(proxy, args);
         });
     }
