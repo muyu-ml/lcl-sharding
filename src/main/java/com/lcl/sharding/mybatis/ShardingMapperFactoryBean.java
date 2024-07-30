@@ -1,8 +1,10 @@
-package com.lcl.sharding.demo;
+package com.lcl.sharding.mybatis;
 
+import com.lcl.sharding.engine.ShardingContext;
+import com.lcl.sharding.engine.ShardingResult;
+import com.lcl.sharding.demo.model.User;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.Configuration;

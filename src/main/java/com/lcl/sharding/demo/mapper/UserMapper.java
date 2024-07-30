@@ -1,5 +1,6 @@
-package com.lcl.sharding.demo;
+package com.lcl.sharding.demo.mapper;
 
+import com.lcl.sharding.demo.model.User;
 import org.apache.ibatis.annotations.*;
 
 /**

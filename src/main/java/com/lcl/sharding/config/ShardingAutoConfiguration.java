@@ -1,5 +1,6 @@
-package com.lcl.sharding.demo;
+package com.lcl.sharding.config;
 
+import com.lcl.sharding.datasource.ShardingDataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

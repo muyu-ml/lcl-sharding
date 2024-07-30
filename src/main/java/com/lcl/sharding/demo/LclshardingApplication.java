@@ -1,9 +1,9 @@
-package com.lcl.sharding;
+package com.lcl.sharding.demo;
 
-import com.lcl.sharding.demo.ShardingAutoConfiguration;
-import com.lcl.sharding.demo.ShardingMapperFactoryBean;
-import com.lcl.sharding.demo.User;
-import com.lcl.sharding.demo.UserMapper;
+import com.lcl.sharding.config.ShardingAutoConfiguration;
+import com.lcl.sharding.mybatis.ShardingMapperFactoryBean;
+import com.lcl.sharding.demo.mapper.UserMapper;
+import com.lcl.sharding.demo.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
 @Slf4j
 @SpringBootApplication
 @Import(ShardingAutoConfiguration.class)
-@MapperScan(value = "com.lcl.sharding.demo", factoryBean = ShardingMapperFactoryBean.class)
+@MapperScan(value = "com.lcl.sharding.demo.mapper", factoryBean = ShardingMapperFactoryBean.class)
 public class LclshardingApplication {
 
 	public static void main(String[] args) {
@@ -52,9 +52,9 @@ public class LclshardingApplication {
 		User newUser = userMapper.selectById(id);
 		log.info(" ====>>> newUser: {}", newUser);
 
-//			log.info(" ====>>> 4. test delete ...");
-//			int deleted = userMapper.deleteById(1);
-//			log.info(" ====>>> deleteRow: {}", deleted);
+		log.info(" ====>>> 4. test delete ...");
+		int deleted = userMapper.deleteById(id);
+		log.info(" ====>>> deleteRow: {}", deleted);
 	}
 
 }

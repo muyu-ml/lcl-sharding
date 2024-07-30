@@ -1,4 +1,4 @@
-package com.lcl.sharding.demo;
+package com.lcl.sharding.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
