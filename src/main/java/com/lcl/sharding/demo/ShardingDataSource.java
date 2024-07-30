@@ -1,6 +1,7 @@
 package com.lcl.sharding.demo;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import java.util.LinkedHashMap;
@@ -11,7 +12,7 @@ import java.util.Map;
  * @Author conglongli
  * @date 2024/7/30 15:11
  */
-
+@Slf4j
 public class ShardingDataSource extends AbstractRoutingDataSource {
 
     public ShardingDataSource(ShardingPropertites propertites) {
@@ -38,6 +39,8 @@ public class ShardingDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
         ShardingResult shardingResult = ShardingContext.getShardingResult();
-        return shardingResult == null ? null : shardingResult.getTargetDatasourceName();
+        Object object = shardingResult == null ? null : shardingResult.getTargetDatasourceName();
+        log.info(" =====>>> current datasource: {}", object);
+        return object;
     }
 }
