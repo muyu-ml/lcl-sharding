@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: lclsharding
+    datasource:
+        url: jdbc:mysql://localhost:3306/ds0?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
